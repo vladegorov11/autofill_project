@@ -14,9 +14,9 @@
  *= require_self
  */
 
- @import "bootstrap";
-
-//  start style for video header 
+@import "bootstrap";
+@import "font-awesome";
+//  start style for video header
  header {
   position: relative;
   background-color: black;
@@ -67,7 +67,7 @@ header .overlay {
 }
 //  end  style for video header
 
-// login form 
+// login form
 .sr-only {
     position: absolute;
     width: 1px;
@@ -78,4 +78,3 @@ header .overlay {
     white-space: nowrap;
     border: 0;
 }
-
