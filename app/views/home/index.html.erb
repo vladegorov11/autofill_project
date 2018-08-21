@@ -8,8 +8,10 @@
       <div class="my-auto w-100 text-white">
         <h1 class="display-4">Hello, world!</h1>
 			  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-			 	<%= link_to 'Sign in',  new_user_session_path, class:"btn btn-primary btn-md" %>
-			  <%= link_to 'Sign up',  new_user_registration_path, class:"btn btn-primary btn-md" %>
+			  <%unless user_signed_in? %>
+				 	<%= link_to 'Sign in',  new_user_session_path, class:"btn btn-primary btn-md" %>
+				  <%= link_to 'Sign up',  new_user_registration_path, class:"btn btn-primary btn-md" %>
+			  <%end%>
       </div>
     </div>
   </div>
