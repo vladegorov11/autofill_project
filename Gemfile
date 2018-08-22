@@ -35,6 +35,7 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem "font-awesome-rails"
 gem "pundit"
+gem 'gravatar_image_tag'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

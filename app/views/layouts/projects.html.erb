@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AutofillProject</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render  'shared/nav_bar'%>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="list-group">
+            <%= link_to projects_path, class: "list-group-item list-group-item-action #{'active' if action_name == 'index'}" do %>
+            Projects
+            <span class="badge badge-dark badge-pill">12</span>
+            <%end%>
+            <%= link_to 'New Project', new_project_path, class: "list-group-item list-group-item-action #{'active' if action_name == 'new'}"%>
+            <%= link_to 'Edit Profile',  edit_user_registration_path, class: "list-group-item list-group-item-action #{'active' if action_name == 'edit'}"%>
+            <%= link_to  projects_archive_path, class: "list-group-item list-group-item-action #{'active' if action_name == 'archive'}" do %>
+            Archive
+            <span class="badge badge-dark badge-pill">4</span>
+            <%end%>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

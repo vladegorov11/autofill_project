@@ -20,3 +20,13 @@
 
 
 
+
+document.addEventListener('turbolinks:load', function () {
+  $( "#project_project_type" ).change(function() {
+    if ($( "#project_project_type" ).val() === 'web'){
+      $('#domain').append('<input class="string optional form-control mt-4 mb-4" placeholder="Domain" type="text" name="project[domain]" id="project_domain">');
+    }else {
+      $('#domain').html('');
+    }
+  });
+});

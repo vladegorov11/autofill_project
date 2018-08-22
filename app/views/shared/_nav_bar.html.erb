@@ -19,6 +19,9 @@
           <%= fa_icon "sign-out", text: "Sign out" %>
           <%end%>
         </li>
+        <li class="nav-item">
+          <%= gravatar_image_tag(current_user.email.gsub('spam', 'mdeering'), alt: 'user', class: "rounded-circle",gravatar: { size: 40 }); %>
+        </li>
       <%end%>
     </ul>
   </div>

@@ -1,7 +1,9 @@
-<h3><%=@project.title%></h3>
-<p><%=@project.description%></p>
-<p><%=@project.api_token%></p>
-<p><%=@project.auth_token%></p>
+<h3>Title: <%=@project.title%></h3>
+<p>Description: <%=@project.description%></p>
+<p>Api token: <%=@project.api_token%></p>
+<p>Auth token: <%=@project.auth_token%></p>
 
-<%= link_to 'Remove project', project_path, class: "button", method: :delete, data: { confirm: 'Are you sure?'} %>
-<%= link_to 'Edit project', edit_project_path(@project), class: "button"%>
+<%= link_to 'Remove project', project_path, class: "button", method: :delete, data: { confirm: 'Are you sure?'} if @project.archived%>|
+<%= link_to 'Edit project', edit_project_path(@project), class: "button"%>|
+<%= link_to @project.archived ? 'Unarchived project' : 'Move to archive', archived_project_path, class: "button", data: { confirm: 'Are you sure?'} %>|
+<%= link_to 'Reset api tokens' , update_tokens_project_path, class: "button", data: { confirm: 'Are you sure?'} %>

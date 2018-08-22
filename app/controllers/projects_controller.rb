@@ -1,9 +1,9 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :update, :destroy, :edit]
+  before_action :set_project, except: [:index, :new, :create, :archive]
   before_action :authenticate_user!
 
   def index
-    @projects = Project.all
+    @projects = Project.where(archived: false)
   end
 
   def show
@@ -49,6 +49,32 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def archived
+    @project.archived = @project.archived ?  false :  true
+    if @project.save
+      respond_to do |format|
+        format.html { redirect_to projects_archive_url, notice: "Project was successfully #{@project.archived ? 'archived' : 'unarchived'}"  }
+        format.json { head :no_content }
+      end
+    else
+      format.html { render :show }
+      format.json { render json: @project.errors, status: :unprocessable_entity }
+    end
+  end
+
+  def archive
+    @projects = Project.where(archived: true)
+  end
+
+  def regenerate_token
+    @project.regenerate_api_token
+    @project.regenerate_auth_token
+    respond_to do |format|
+      format.html { redirect_to @project, notice: "Project keys was successfully update"  }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def set_project
@@ -56,7 +82,7 @@ class ProjectsController < ApplicationController
   end
 
   def params_project
-    params.require(:project).permit(:title, :description)
+    params.require(:project).permit(:title, :description, :project_type, :domain)
   end
 
 end
