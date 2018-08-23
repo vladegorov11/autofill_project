@@ -16,7 +16,7 @@
       <% if user_signed_in?%>
         <li class="nav-item">
           <%= link_to  destroy_user_session_path, method: :delete, class: 'nav-link' do %>
-          <%= fa_icon "sign-out", text: "Sign out" %>
+          <%= fa_icon "sign-out", text: "Sign out", right: true %>
           <%end%>
         </li>
         <li class="nav-item">

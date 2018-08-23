@@ -1,0 +1,24 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Manage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @project.groups.each do |group|%>
+      <tr>
+        <th scope="row">1</th>
+        <td><%= group.name %></td>
+        <td><%= group.description%></td>
+        <td class="text-right manage-icons">
+          <%=link_to group_path(group) do  fa_icon "eye"  end%>
+          <%=link_to edit_group_path(group) do fa_icon "edit" end%>
+          <%=link_to group_path(group), method: :delete, data: { confirm: 'Are you sure?'} do fa_icon "trash" end%>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

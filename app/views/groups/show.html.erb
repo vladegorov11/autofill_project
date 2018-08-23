@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-10">
+    <h3><%=@group.name%></h3>
+    <hr>
+    <p><%= @group.description%></p>
+    <hr>
+    <h5>We can add your tags through file</h5>
+    <form class="form-inline">
+      <div class="form-group mx-sm-3 mb-2">
+        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">import CSV</button>
+    </form>
+    <br>
+    <h4>Groups</h4>
+    <%50.times do %>
+      <span class="badge badge-success badge-pill tags ">hello <%= rand(55..345345)%> <a href="" class="link">&times;</a></span>
+    <%end%>
+  </div>
+  <div class="col-md-2">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <%=link_to 'Edit Group' , edit_group_path(@group) %>
+      </li>
+      <li class="list-group-item">
+        <%=link_to 'Remove group', group_path(@group), method: :delete, data: { confirm: 'Are you sure?'} %>
+      </li>
+      <li class="list-group-item">
+        <a href="">Export to CSV</a>
+      </li>
+    </ul>
+  </div>
+</div>

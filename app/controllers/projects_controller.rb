@@ -1,12 +1,14 @@
 class ProjectsController < ApplicationController
+  layout 'dashboard'
   before_action :set_project, except: [:index, :new, :create, :archive]
   before_action :authenticate_user!
 
   def index
-    @projects = Project.where(archived: false)
+    @projects = Project.where(archived: false).decorate
   end
 
   def show
+    @project = @project.decorate 
   end
 
   def edit
@@ -63,7 +65,7 @@ class ProjectsController < ApplicationController
   end
 
   def archive
-    @projects = Project.where(archived: true)
+    @projects = Project.where(archived: true).decorate
   end
 
   def regenerate_token

@@ -1,9 +1,39 @@
-<h3>Title: <%=@project.title%></h3>
-<p>Description: <%=@project.description%></p>
-<p>Api token: <%=@project.api_token%></p>
-<p>Auth token: <%=@project.auth_token%></p>
-
-<%= link_to 'Remove project', project_path, class: "button", method: :delete, data: { confirm: 'Are you sure?'} if @project.archived%>|
-<%= link_to 'Edit project', edit_project_path(@project), class: "button"%>|
-<%= link_to @project.archived ? 'Unarchived project' : 'Move to archive', archived_project_path, class: "button", data: { confirm: 'Are you sure?'} %>|
-<%= link_to 'Reset api tokens' , update_tokens_project_path, class: "button", data: { confirm: 'Are you sure?'} %>
+<div class="row">
+  <div class="col-md-10">
+    <h3><%=@project.title%></h3>
+    <span calss='time'><%=@project.created_at%></span>
+    <hr>
+    <p><%=@project.description%></p>
+    <hr>
+    <div class="alert <%= @project.in_archive_alert?%>" role="alert">
+      <h4 class="alert-heading">Your api and auth keys <strong><%= @project.in_archive_message?%></strong></h4>
+      <p>Api token: <%=@project.api_token%></p>
+      <p>Auth token: <%=@project.auth_token%></p>
+      <hr>
+      <p class="mb-0">Do not give anyone information about your keys</p>
+    </div>
+    <h3>Groups</h3>
+    <%= render 'groups'%>
+  </div>
+  <div class="col-md-2">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <%= link_to 'New Group', new_project_group_path(@project), class:'btn btn-info'%>
+      </li>
+      <%if @project.archived%>
+        <li class="list-group-item">
+          <%= link_to 'Remove project', project_path, class: "button", method: :delete, data: { confirm: 'Are you sure?'} %>
+        </li>
+      <%end%>
+      <li class="list-group-item">
+        <%= link_to @project.archived ? 'Unarchived project' : 'Move to archive', archived_project_path, class: "button", data: { confirm: 'Are you sure?'} %>
+      </li>
+      <li class="list-group-item">
+        <%= link_to 'Edit project', edit_project_path(@project), class: "button"%>
+      </li>
+      <li class="list-group-item">
+        <%= link_to 'Reset api tokens' , update_tokens_project_path, class: "button", data: { confirm: 'Are you sure?'} %>
+      </li>
+    </ul>
+  </div>
+</div>
