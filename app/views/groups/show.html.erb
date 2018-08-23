@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-md-10">
+    <%= link_to "&laquo; Back".html_safe, project_path(@group.project)%>
     <h3><%=@group.name%></h3>
     <hr>
     <p><%= @group.description%></p>
@@ -13,8 +14,10 @@
     </form>
     <br>
     <h4>Groups</h4>
+    <% i = 0 %>
     <%50.times do %>
-      <span class="badge badge-success badge-pill tags ">hello <%= rand(55..345345)%> <a href="" class="link">&times;</a></span>
+      <span class="badge badge-success badge-pill tags " id='<%=i%>d'>hello <%= rand(55..345345)%> <a id='<%=i%>' href="javascript:void(0);" class="link">&times;</a></span>
+      <%i+=1%>
     <%end%>
   </div>
   <div class="col-md-2">

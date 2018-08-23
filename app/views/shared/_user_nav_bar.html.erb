@@ -1,0 +1,12 @@
+<div class="list-group">
+  <%= link_to projects_path, class: "list-group-item list-group-item-action #{'active' if action_name == 'index'}" do %>
+    Projects
+    <span class="badge badge-dark badge-pill"> <%= 6 %></span>
+  <%end%>
+  <%= link_to 'New Project', new_project_path, class: "list-group-item list-group-item-action #{'active' if action_name == 'new'}"%>
+  <%= link_to 'Edit Profile',  edit_user_registration_path, class: "list-group-item list-group-item-action #{'active' if action_name == 'edit'}"%>
+  <%= link_to  projects_archive_path, class: "list-group-item list-group-item-action #{'active' if action_name == 'archive'}" do %>
+    Archive
+    <span class="badge badge-dark badge-pill">4</span>
+  <%end%>
+</div>
