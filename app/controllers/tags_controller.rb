@@ -1,47 +1,24 @@
-class tagsController < ApplicationController
+class TagsController < ApplicationController
   layout 'dashboard'
-  before_action :set_tag, only: [:edit, :update, :destroy]
+  before_action :set_group
   before_action :authenticate_user!
 
-  def edit
-  end
-
-  def update
-    respond_to do |format|
-      if @tag.update(params_tag)
-        format.html { redirect_to @tag, notice: 'tag was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tag }
-      else
-        format.html { render :edit }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @tag.destroy
-    respond_to do |format|
-      format.html { redirect_to tags_url, notice: 'tag was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   def import
-
+    Tag.import(@group, params[:file])
+    redirect_to  @group, notice: 'ok!'
   end
 
   def export
-
+    respond_to do |format|
+      format.html 
+      format.csv { send_data @group.tags.to_csv, filename: "tags-#{@group.name}-#{Date.today}.csv" }
+    end
   end
 
   private
 
-  def set_tag
-    @tag = Tag.find(params[:id])
-  end
-
-  def params_tag
-    params.require(:tag).permit(:name)
+  def set_group
+    @group = Group.find(params[:group_id])
   end
 
 end

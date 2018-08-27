@@ -4,11 +4,13 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @projects = Project.where(archived: false).decorate
+    @projects = Project.where(archived: false)
+    authorize @projects
   end
 
   def show
-    @project = @project.decorate 
+    authorize @project
+    @project = @project.decorate
   end
 
   def edit

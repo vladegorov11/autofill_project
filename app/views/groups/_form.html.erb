@@ -6,6 +6,7 @@
          <%= f.error_notification %>
          <%= f.input :name, input_html: { class: "form-control mb-4"} , placeholder: 'Title', wrapper: false, label_html: { class: "sr-only" }%>
          <%= f.input :description, input_html: { class: "form-control mb-4 text-area"}, placeholder: 'Description', wrapper: false, label_html: { class: "sr-only" } %>
+         <%= f.input :all_tags, input_html: { class: "form-control mb-4"}, placeholder: 'Tags', wrapper: false, label_html: { class: "sr-only" } %>
          <%= f.button :submit, class: "btn-lg btn-success btn-block mt-4" %>
        <% end %>
      </div>

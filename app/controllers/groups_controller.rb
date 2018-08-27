@@ -51,6 +51,8 @@ class GroupsController < ApplicationController
     end
   end
 
+  
+
   private
   def set_project
     @project = Project.find(params[:project_id])
@@ -61,6 +63,6 @@ class GroupsController < ApplicationController
   end
 
   def params_group
-    params.require(:group).permit(:name, :description)
+    params.require(:group).permit(:name, :description, :all_tags)
   end
 end

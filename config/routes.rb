@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     get 'update-tokens', to: 'projects#regenerate_token', on: :member
     get 'archived', on: :member
     resources :groups do
-      resources :tags
+      resources :tags do
+        collection {post :import}
+        collection {get :export}
+      end
     end
   end
 end
