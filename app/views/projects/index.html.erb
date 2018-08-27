@@ -1,1 +1,2 @@
-<%= render partial: "project", collection: @projects %>
+<%= render partial: "project", collection: @projects.decorate %>
+<%= will_paginate @posts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>

@@ -1,4 +1,11 @@
 class ProjectPolicy < ApplicationPolicy
+
+  class Scope < Scope
+    def resolve
+      scope.where(user_id: user.id)
+    end
+  end
+
   def index?
     true
   end
@@ -28,10 +35,13 @@ class ProjectPolicy < ApplicationPolicy
     return true if user.present? && user == project.user
   end
 
+  def archive?
+    true
+  end
   private
 
   def project
     record
   end
-  
+
 end

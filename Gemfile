@@ -37,6 +37,7 @@ gem "font-awesome-rails"
 gem "pundit"
 gem 'gravatar_image_tag'
 gem 'draper'
+gem 'will_paginate-bootstrap4'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -4,7 +4,8 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @projects = Project.where(archived: false)
+  #  @projects = Project.where(archived: false).paginate(:page => params[:page], :per_page => 3)
+    @projects = policy_scope(Project.where(archived: false)).paginate(:page => params[:page], :per_page => 3)
     authorize @projects
   end
 
@@ -19,7 +20,10 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(params_project)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html {
+          redirect_to @project
+          flash[:success] = 'Project was successfully updated.'
+         }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
@@ -36,7 +40,10 @@ class ProjectsController < ApplicationController
     @project = current_user.projects.build(params_project)
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html {
+          redirect_to @project
+          flash[:success] = 'Project was successfully created.'
+        }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -48,7 +55,10 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html {
+        redirect_to projects_url
+        flash[:success] = 'Project was successfully destroyed.'
+      }
       format.json { head :no_content }
     end
   end
@@ -57,7 +67,10 @@ class ProjectsController < ApplicationController
     @project.archived = @project.archived ?  false :  true
     if @project.save
       respond_to do |format|
-        format.html { redirect_to projects_archive_url, notice: "Project was successfully #{@project.archived ? 'archived' : 'unarchived'}"  }
+        format.html {
+          redirect_to  @project 
+          flash[:success] = "Project was successfully #{@project.archived ? 'archived' : 'unarchived'}"
+        }
         format.json { head :no_content }
       end
     else
@@ -67,14 +80,18 @@ class ProjectsController < ApplicationController
   end
 
   def archive
-    @projects = Project.where(archived: true).decorate
+    @projects = policy_scope(Project.where(archived: true)).paginate(:page => params[:page], :per_page => 3)
+    authorize @projects
   end
 
   def regenerate_token
     @project.regenerate_api_token
     @project.regenerate_auth_token
     respond_to do |format|
-      format.html { redirect_to @project, notice: "Project keys was successfully update"  }
+      format.html {
+        redirect_to @project
+        flash[:success] = "Project keys was successfully update"
+      }
       format.json { head :no_content }
     end
   end
