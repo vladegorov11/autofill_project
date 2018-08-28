@@ -4,17 +4,17 @@ class GroupsController < ApplicationController
   before_action :set_project, only: [:new, :create]
   before_action :authenticate_user!
 
-  def index
-    @groups = Group.all
-  end
 
   def show
+    authorize @group
   end
 
   def edit
+    authorize @group
   end
 
   def update
+    authorize @group
     respond_to do |format|
       if @group.update(params_group)
         format.html { redirect_to @group, success: 'group was successfully updated.' }
@@ -28,13 +28,15 @@ class GroupsController < ApplicationController
 
   def new
     @group = @project.groups.build
+    authorize @group
   end
 
   def create
     @group = @project.groups.build(params_group)
+    authorize @group
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'group was successfully created.' }
+        format.html { redirect_to @group, success: 'group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
@@ -44,14 +46,15 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+    authorize @group
     @group.destroy
     respond_to do |format|
-      format.html { redirect_back fallback_location: root_path, notice: 'group was successfully destroyed.' }
+      format.html { redirect_back fallback_location: root_path, success: 'group was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
-  
+
 
   private
   def set_project

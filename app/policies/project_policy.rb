@@ -2,7 +2,11 @@ class ProjectPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.where(user_id: user.id)
+      if user.admin?
+         scope
+      else
+         scope.where(user_id: user.id)
+      end
     end
   end
 
@@ -18,13 +22,12 @@ class ProjectPolicy < ApplicationPolicy
     user.present?
   end
 
-
   def update?
     return true if user.present? && user == project.user
   end
 
   def show?
-    return true if user.present? && user == project.user
+    return true if user.present? && user == project.user || user.admin?
   end
 
   def edit?
@@ -32,11 +35,19 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def destroy?
-    return true if user.present? && user == project.user
+    return true if user.present? && user == project.user || user.admin?
   end
 
   def archive?
     true
+  end
+
+  def regenerate_token?
+    return true if user.present? && user == project.user
+  end
+
+  def archived?
+    return true if user.present? && user == project.user
   end
   private
 

@@ -4,8 +4,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-  #  @projects = Project.where(archived: false).paginate(:page => params[:page], :per_page => 3)
-    @projects = policy_scope(Project.where(archived: false)).paginate(:page => params[:page], :per_page => 3)
+    @projects = policy_scope(Project.unarchived.filter(params.slice(:project_type, :starts_with))).paginate(:page => params[:page], :per_page => 3)
     authorize @projects
   end
 
@@ -15,9 +14,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    authorize @project
   end
 
   def update
+    authorize @project
     respond_to do |format|
       if @project.update(params_project)
         format.html {
@@ -34,10 +35,12 @@ class ProjectsController < ApplicationController
 
   def new
     @project = current_user.projects.build
+    authorize @project
   end
 
   def create
     @project = current_user.projects.build(params_project)
+    authorize @project
     respond_to do |format|
       if @project.save
         format.html {
@@ -53,6 +56,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    authorize @project
     @project.destroy
     respond_to do |format|
       format.html {
@@ -64,11 +68,12 @@ class ProjectsController < ApplicationController
   end
 
   def archived
+    authorize @project
     @project.archived = @project.archived ?  false :  true
     if @project.save
       respond_to do |format|
         format.html {
-          redirect_to  @project 
+          redirect_to  @project
           flash[:success] = "Project was successfully #{@project.archived ? 'archived' : 'unarchived'}"
         }
         format.json { head :no_content }
@@ -85,6 +90,7 @@ class ProjectsController < ApplicationController
   end
 
   def regenerate_token
+    authorize @project
     @project.regenerate_api_token
     @project.regenerate_auth_token
     respond_to do |format|

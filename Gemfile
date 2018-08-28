@@ -38,6 +38,7 @@ gem "pundit"
 gem 'gravatar_image_tag'
 gem 'draper'
 gem 'will_paginate-bootstrap4'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -47,6 +48,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 3.7'
+  gem 'factory_bot_rails'
+  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
 end
 
 group :development do

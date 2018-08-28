@@ -1,0 +1,5 @@
+<%= form_tag(projects_path, method: :get, class: 'form-inline mb-3')  do %>
+  <%= select_tag :project_type, options_for_select( Project.project_types.keys, ''), include_blank: 'Choose type', class: "form-control"%>
+  <%= text_field_tag :starts_with, nil  , class: 'form-control ml-3', placeholder: 'Project title'%>
+  <%= submit_tag 'Search', class: 'btn btn-primary ml-2' %>
+<% end %>
