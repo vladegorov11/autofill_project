@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
 	include Filterable
-	
+
 	has_many :groups, dependent: :destroy
 	belongs_to :user
   has_secure_token  :auth_token
@@ -13,7 +13,7 @@ class Project < ApplicationRecord
 	scope :project_type, -> (project_type) { where project_type: project_type }
 	scope :starts_with, -> (title) { where("title like ?", "#{title}%")}
 	scope :unarchived, -> { where(archived: false) }
-
+	
 end
 
 

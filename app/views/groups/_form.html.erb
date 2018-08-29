@@ -1,12 +1,28 @@
 <div class="container-fluid mt-4">
+  <% if @group.errors.any? %>
+  <div class="alert alert-danger">
+    <h5><%= t('common.errors') %></h5>
+    <ul>
+      <% @group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
   <div class="row">
      <div class="col-md-6 offset-md-3 ">
        <h2 class='text-center'> <%= action_name.upcase  + ' Group'.upcase%> <h2>
        <%= simple_form_for [@project, @group] do |f| %>
-         <%= f.error_notification %>
-         <%= f.input :name, input_html: { class: "form-control mb-4"} , placeholder: 'Title', wrapper: false, label_html: { class: "sr-only" }%>
-         <%= f.input :description, input_html: { class: "form-control mb-4 text-area"}, placeholder: 'Description', wrapper: false, label_html: { class: "sr-only" } %>
-         <%= f.input :all_tags, input_html: { class: "form-control mb-4"}, placeholder: 'Tags', wrapper: false, label_html: { class: "sr-only" } %>
+         <%#= f.error_notification %>
+         <div class="form-group">
+           <%= f.input :name, input_html: { class: "form-control"} , placeholder: 'Title', wrapper: false, label_html: { class: "sr-only" }, error: false%>
+         </div>
+         <div class="form-group">
+           <%= f.input :description, input_html: { class: "form-control  text-area"}, placeholder: 'Description', wrapper: false, label_html: { class: "sr-only" }, error: false %>
+         </div>
+         <div class="form-group">
+           <%= f.input :all_tags, input_html: { class: "form-control "}, placeholder: 'Tags', wrapper: false, label_html: { class: "sr-only" } %>
+         </div>
          <%= f.button :submit, class: "btn-lg btn-success btn-block mt-4" %>
        <% end %>
      </div>
