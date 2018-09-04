@@ -1,5 +1,7 @@
 class Group < ApplicationRecord
 	require 'csv'
+	extend FriendlyId
+  friendly_id :name, use: :slugged
 	belongs_to :project
   has_many :taggings, dependent: :destroy
 	has_many :tags, through: :taggings
@@ -14,6 +16,4 @@ class Group < ApplicationRecord
   def all_tags=(name)
     self.tags = name.split(',').map {|name| Tag.where(name: name.strip).first_or_create!}
   end
-
-
 end

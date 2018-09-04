@@ -38,7 +38,7 @@ gem "pundit"
 gem 'gravatar_image_tag'
 gem 'draper'
 gem 'will_paginate-bootstrap4'
-
+gem 'friendly_id', '~> 5.2.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

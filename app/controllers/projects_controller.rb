@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
   def show
     authorize @project
     @project = @project.decorate
+    @groups  = @project.groups.paginate(:page => params[:page], :per_page => 2)
   end
 
   def edit

@@ -2,26 +2,24 @@ module Api
   class GroupsController < ApiController
     before_action :verification_auth_token, only: [:create]
     before_action :verification_api_token, only: [:index, :show]
-    before_action :set_group 
+    before_action :set_group, only: [:show]
 
     def index
       @groups = @project.groups
-      render json: { groups: @groups }, status: :ok
+      render json: { groups: @groups.pluck(:name) }, status: :ok
     end
 
     def show
-      render json: { group: [ @group, tags: @group.tags.pluck(:name)]}, status: :ok
-    end
-
-    def create
-      
-      render json: 
+      @project.groups.include?(@group) if
+        render json: { group: [ @group.slice( :name), tags: @group.tags.pluck(:name)]}, status: :ok
+      else
+        head :bad_request
     end
 
     private
 
     def set_group
-      @group = Group.find(params[:id])
+      @group = Group.friendly.find(params[:id])
     end
   end
 end

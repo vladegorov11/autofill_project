@@ -13,7 +13,8 @@ class Project < ApplicationRecord
 	scope :project_type, -> (project_type) { where project_type: project_type }
 	scope :starts_with, -> (title) { where("title like ?", "#{title}%")}
 	scope :unarchived, -> { where(archived: false) }
-	
+	scope :archived, -> { where(archived: true) }
+
 end
 
 

@@ -6,7 +6,7 @@ class TagsController < ApplicationController
 
   def import
     Tag.import(@group, params[:file])
-    redirect_to  @group, notice: 'ok!'
+    redirect_to  @group, notice: 'File imported'
   end
 
   def export
@@ -19,10 +19,11 @@ class TagsController < ApplicationController
   def destroy_tag
     Tagging.where(group_id: @group.id, tag_id: @tag.id).destroy_all
   end
+
   private
 
   def set_group
-    @group = Group.find(params[:group_id])
+    @group = Group.friendly.find(params[:group_id])
   end
 
   def set_tag

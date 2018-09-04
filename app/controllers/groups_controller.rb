@@ -61,7 +61,7 @@ class GroupsController < ApplicationController
   end
 
   def set_group
-    @group = Group.find(params[:id])
+    @group = Group.friendly.find(params[:id])
   end
 
   def params_group

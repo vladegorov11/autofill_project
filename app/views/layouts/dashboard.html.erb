@@ -10,12 +10,7 @@
 
   <body>
     <%= render  'shared/nav_bar'%>
-    <% flash.each do |name,message|%>
-      <div class="alert text-center <%= bootstrap_class_for(name) %>">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <strong><%= message%></strong>
-      </div>
-    <% end %>
+    <%= render  'shared/flash_messages'%>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-2">
