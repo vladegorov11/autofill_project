@@ -40,10 +40,11 @@ gem 'draper'
 gem 'will_paginate-bootstrap4'
 gem 'friendly_id', '~> 5.2.0'
 gem 'groupdate'
-gem 'chartkick'
-gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '5.x'
-gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
 
+gem 'chartkick'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+#gem 'searchkick'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

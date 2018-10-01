@@ -5,7 +5,7 @@ class TagsController < ApplicationController
   before_action :authenticate_user!, except: [:destroy_tag]
 
   def import
-    Tag.import(@group, params[:file])
+    Tag.import_csv(@group, params[:file])
     redirect_to  @group, notice: 'File imported'
   end
 
