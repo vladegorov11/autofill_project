@@ -10,10 +10,12 @@ module Api
     end
 
     def show
-      @project.groups.include?(@group) if
-        render json: { group: [ @group.slice( :name), tags: @group.tags.pluck(:name)]}, status: :ok
+      @group.counter
+      if @project.groups.include?(@group)
+        render json: { group: [ @group.slice( :name), tags: @group.tags.search(params[:search_tag]).records.pluck(:name)]}, status: :ok
       else
         head :bad_request
+      end
     end
 
     private

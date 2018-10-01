@@ -1,2 +1,3 @@
+<%= render 'shared/filter_form' %>
 <%= render partial: "project", collection: @projects.decorate %>
 <%= will_paginate @projecs, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center) %>

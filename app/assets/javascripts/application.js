@@ -16,10 +16,9 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require highcharts
+//= require chartkick
 //= require_tree .
-
-
-
 
 document.addEventListener('turbolinks:load', function () {
   $( "#project_project_type" ).change(function() {

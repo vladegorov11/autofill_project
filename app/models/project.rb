@@ -16,15 +16,3 @@ class Project < ApplicationRecord
 	scope :archived, -> { where(archived: true) }
 
 end
-
-
-# t.string "title"
-# t.text "description"
-# t.string "api_token"
-# t.string "auth_token"
-# t.integer "user_id"
-# t.datetime "created_at", null: false
-# t.datetime "updated_at", null: false
-# t.integer "project_type"
-# t.boolean "archived", default: false
-# t.string "domain"

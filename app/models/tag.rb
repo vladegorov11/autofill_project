@@ -1,15 +1,23 @@
+#require 'elasticsearch/model'
 class Tag < ApplicationRecord
+
+	include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+
 	has_many :taggings, dependent: :destroy
 	has_many :groups, through: :taggings
 	validates :name, uniqueness: true
 	validates :name, presence: true
 
-	def self.import(group, file)
-		CSV.foreach(file.path , headers: true) do |row|
-			tag  = self.find_or_create_by row.to_hash
-			group.tags.include?(tag) ? next : group.tags << tag
-		end
-	end
+
+	#
+	# def self.import(group, file)
+	# 	CSV.foreach(file.path , headers: true) do |row|
+	# 		tag  = self.find_or_create_by row.to_hash
+	# 		group.tags.include?(tag) ? next : group.tags << tag
+	# 	end
+	# end
 
 	def self.to_csv
     attributes = %w{name}

@@ -13,7 +13,16 @@
       <%= submit_tag 'import CSV', class: 'btn btn-primary mb-2'%>
     <%end%>
     <br>
-    <p>api<%= request.fullpath%>?api_token={your api token}&search_tag={your search word }</p>
+    <div class="alert alert-dark text-center" role="alert">
+      <b>Your url address for use this group api:</b>  api<%= request.fullpath%>?api_token={your api token}&search_tag={your search word }
+    </div>
+    <%= line_chart @group.requests.group_by_day(:created_at).maximum(:count) ,
+                                                                            ytitle: "Requests count",
+                                                                            xtitle: "Days",
+                                                                            thousands: ",",
+                                                                            label: "Request count ",
+                                                                            title: "API request count by days "
+                                                                             %>
     <h4>Groups</h4>
     <%@group.tags.each do |tag|%>
     <span class="badge badge-success badge-pill tags " id='<%=tag.id%>d'><%=tag.name%> <a id='<%=tag.id%>' href="javascript:void(0);" class="link">&times;</a></span>
