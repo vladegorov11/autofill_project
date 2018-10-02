@@ -11,7 +11,7 @@
   <body>
     <%= render  'shared/nav_bar'%>
     <%= render  'shared/flash_messages'%>
-    <div class="container-fluid">
+    <div class="container-fluid" id='main'>
       <div class="row">
         <div class="col-md-2">
           <%= render 'shared/user_nav_bar'%>
@@ -20,6 +20,8 @@
           <%= yield %>
         </div>
       </div>
+
     </div>
+
   </body>
 </html>
